@@ -89,8 +89,9 @@ class ProductController extends Controller
         $resultado = Product::where('name', 'like', '%' . $request->keyword . '%')->get();
 
         foreach ($resultado as $data) {
-
-
+            if ($data->url_image == '') {
+                $data->url_image = "https://www.bicifan.uy/wp-content/uploads/2016/09/producto-sin-imagen.png";
+            }
             if ($data->discount == 0) {
                 $data->discount = "Sin descuento";
             } else {
