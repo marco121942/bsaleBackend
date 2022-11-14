@@ -1,64 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Desafío bsale Backend Ecommerce
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+En el desafío 'bsale', consiste en realizar un pequeño e-commerce, en este repositorio podrá encontrar el proyecto BACKEND quien es el encargado de conectarse a la base de datos y brindar servicios API REST para que puedan ser consumidos por el FRONTEND que lo puede encontrar en el siguiente repositorio. 
+```sh
+> https://github.com/marco121942/bsaleFrontend
+```
 
-## About Laravel
+### Requisitos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Tecnologías necesarias para el correcto funcionamiento de la aplicación:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* PHP 7.3.0 >=
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Instalación
 
-## Learning Laravel
+Clonar el respositorio ejecute.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```sh
+> git clone https://github.com/marco121942/bsaleBackend.git
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Instalar dependencias composer.
 
-## Laravel Sponsors
+```sh
+> composer install
+```
+### Variables de entorno
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Modifique los valores por defecto de `.env`, para la correcta ejecución del proyecto, tiene que modificar las credenciales de la base de datos.
 
-### Premium Partners
+```sh
+> cp .env.example .env
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```json
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Despliegue
 
-## Code of Conduct
+Ejecute el siguiente comando para el correcto funcionamiento del proyecto.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```sh
+> php artisan serve
+```
 
-## Security Vulnerabilities
+### Servicios realizados - {{APP_URL_DEV}} -> ejm "http://localhost:8080"
+- Obtener todos los productos que existen en la BD.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Mediante una petición GET, obtendrás como respuesta un array de objetos de todos los productos.
 
-## License
+```sh
+> {{APP_URL_DEV}}/api/v1/get/product
+```
+Respuesta esperada:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![image](https://user-images.githubusercontent.com/42647311/201555348-951ced9c-2698-4e87-9e5a-f02585211140.png)
+
+- Obtener todos los productos clasificados mediante su categoría.
+
+Mediante una petición GET, obtendrás como respuesta un array de objetos de todas las categorías con sus respectivos productos.
+
+```sh
+> {{APP_URL_DEV}}/api/v1/get/productCategory
+```
+Respuesta esperada:
+
+![image](https://user-images.githubusercontent.com/42647311/201555626-5ee8a926-0f61-4e26-926d-2caa3660dc20.png)
+
+- Buscador de productos mediante una palabra clave.
+
+Mediante una petición POST y el envío del parámetro 'keyword', obtendrás todos los productos que coincidan con la palabra clave enviada.
+
+```sh
+> {{APP_URL_DEV}}/api/v1/search/product
+```
+Parámetro esperado:
+
+```json
+{
+    "keyword":"pis"
+}
+```
+Respuesta esperada:
+
+![image](https://user-images.githubusercontent.com/42647311/201556328-c71a5aa4-e245-4df4-ba47-00a7df6e128c.png)
+
+- Filtrado de productos.
+
+Mediante una petición POST y el envío de los parámetros 'typeFilter' y 'dataFilter', obtendrás todos los productos que cumplan el filtrado.
+
+```sh
+> {{APP_URL_DEV}}/api/v1/filter/product
+```
+
+typeFilter:
+
+Puede recibir uno de los siguientes datos 'category','imagen','discount',son los campos mediante el cual se va realziar el filtrado.
+
+
+dataFilter:
+
+             . si es por 'category' , se debe enviar el ID de la categoría.
+
+             . si es por 'imagen' , se debe enviar 0 o 1.
+             
+             . si es por 'discount' , se debe enviar 0 o 1.
+             
+Parámetro esperado:
+
+```json
+{
+    "typeFilter":"category",
+    "dataFilter":2
+}
+```
+Respuesta esperada:
+
+![image](https://user-images.githubusercontent.com/42647311/201557169-35826715-11a4-47f4-b789-72bc6e537569.png)
